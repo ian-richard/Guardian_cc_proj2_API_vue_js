@@ -1,5 +1,12 @@
 <template>
-  <p>{{this.seedata}}</p>
+
+  <div id="app">
+      <!-- <p>{{this.seeData}}</p> -->
+      <p> Test </p>
+      <div id="list" v-if="seeData.length">
+        <review-list :seeData="seeData"></review-list>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -7,27 +14,17 @@ export default {
   name: 'app',
   data(){
     return {
-      stuff: [],
-      seedata: [],
+      seeData: [],
 
     }
   },  
     mounted(){
       this.fetchdata();
     },
-
-    // methods: {
-    //   fetchdata(){
-    //   fetch("http://content.guardianapis.com/search?page=1&page-size=150&q=peter%20bradshaw&format=json&tag=film/film,tone/reviews&from-date=2010-01-01&order-by=newest&show-blocks=all&api-key=test")
-    //   .then(response => response.json())
-    //   .then(data => this.stuff = data.response.results)
-    //   },
-    // }
-
     methods: {
       fetchdata(){
         const promises = [1].map(num => {
-        return fetch("http://content.guardianapis.com/search?page=1&page-size=150&q=peter%20bradshaw&format=json&tag=film/film,tone/reviews&from-date=2010-01-01&order-by=newest&show-blocks=all&api-key=test"
+        return fetch("http://content.guardianapis.com/search?page=1&page-size=10&q=peter%20bradshaw&format=json&tag=film/film,tone/reviews&from-date=2010-01-01&order-by=newest&show-blocks=all&api-key=test"
         ).then(res => res.json());
         });
         
@@ -43,7 +40,8 @@ export default {
             // );
             // console.log(data);
             console.log(reviewData.flat(3))
-            this.seedata = [...reviewData.flat(3)];
+            this.seeData = [...reviewData.flat(3)];
+            console.log(seeData);
           })
        
   
