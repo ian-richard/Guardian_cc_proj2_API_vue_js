@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import ReviewList from "@/components/ReviewList";
+
 export default {
   name: 'app',
   data(){

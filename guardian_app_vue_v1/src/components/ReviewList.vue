@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import ArticleListItem from "@/components/ArticleListItem";
+import ReviewListItem from "@/components/ReviewListItem";
 
 export default {
     name: "review-list",
     props: ["seeData"],
     components: {
-        "review-article-item": ArticleListItem
+        "review-article-item": ReviewListItem
     }
 };
 </script>
