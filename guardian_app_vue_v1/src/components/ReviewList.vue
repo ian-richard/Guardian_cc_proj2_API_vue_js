@@ -23,7 +23,7 @@ export default {
 
 <style>
 .review-list {
-  width: 65%;
+  width: 85%;
   height: 350px;
   overflow-y: scroll;
   display: flex;
