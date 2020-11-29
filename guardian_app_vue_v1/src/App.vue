@@ -5,7 +5,9 @@
       <h1> Film reviews </h1>
       <div id="list" v-if="seeData.length">
         <review-list :seeData="seeData"></review-list>
+        <h2>Film info</h2>
         <film-info
+        v-if="selectedReview"
         :review="selectedReview">
         </film-info>
 
@@ -16,12 +18,15 @@
 <script>
 import { eventBus } from "@/main.js";
 import ReviewList from "@/components/ReviewList";
-import FilmInfo from './components/FilmInfo.vue';
+import FilmInfo from "@/components/FilmInfo.vue";
+import ReviewListItem from "@/components/ReviewListItem";
 
 export default {
   name: 'app',
   components: {
     "review-list": ReviewList,
+    "film-info": FilmInfo,
+    "review-list-item": ReviewListItem
   },
   data() {
     return {
@@ -29,11 +34,6 @@ export default {
       selectedReview: null
     };
   },  
-    mounted(){
-      this.fetchdata();
-
-      eventBus.$on("review-selected", review => (this.selectedReview = review));
-    }, 
     methods: {
       fetchdata(){
         const promises = [1, 2].map(num => {
@@ -44,27 +44,24 @@ export default {
         Promise.all(promises)
           .then(data => {
             let reviewData = data.map (article => article.response.results);
-            // console.log(reviewData)
-            // reviewData.flat(2);
-            
-            // reviewData.reduce(
-            //   (flat, toFlatten) => flat.concat(toFlatten),
-            //   []
-            // );
-            // console.log(data);
-            // console.log(reviewData.flat(3))
             this.seeData = [...reviewData.flat(3)];
             console.log(this.seeData);
           })
-      }
     }
-  }
+      },
+      mounted(){
+      this.fetchdata();
+
+      eventBus.$on("review-selected", review => (this.selectedReview = review));
+      
+    }
+  };
 
 
 </script>
 
 <style>
-/* #list-info {
+#list-info {
   display: flex;
-} */
+}
 </style>

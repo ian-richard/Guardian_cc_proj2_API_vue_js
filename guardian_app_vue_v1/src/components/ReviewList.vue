@@ -22,5 +22,11 @@ export default {
 </script>
 
 <style>
-
+.review-list {
+  width: 65%;
+  height: 350px;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>
